@@ -10,6 +10,9 @@ import static cgtools.Vector.*;
 public class Main {
     public static void main(String[] args) {
 
+        long start = System.currentTimeMillis();
+        // System.out.println(start);
+
         final int width = 480;
         final int height = 270;
         double angel = Math.PI / 2;
@@ -37,6 +40,8 @@ public class Main {
         final String filename = "doc/a03-spheres.png";
         image.write(filename);
         System.out.println("Wrote image: " + filename);
+        
+        System.out.println(System.currentTimeMillis() - start);
 
     }
 }
