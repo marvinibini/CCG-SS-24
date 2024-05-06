@@ -3,7 +3,9 @@ package cgg.a03;
 import cgtools.*;
 import static cgtools.Vector.*;
 
-public record Sphere(Point sphereCenter, double radius, Color color){
+import cgg.a04.Shape;
+
+public record Sphere(Point sphereCenter, double radius, Color color) implements Shape{
     public Hit intersect(Ray r){
 
         Hit hit = null;

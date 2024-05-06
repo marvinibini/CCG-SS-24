@@ -6,7 +6,7 @@
 
   # Use https://search.nixos.org/packages to find packages
   packages = [
-    pkgs.openjdk20
+    pkgs.jdk20
     # pkgs.go
     # pkgs.python311
     # pkgs.python311Packages.pip
