@@ -1,8 +1,8 @@
 package cgg.a04;
 
+import cgg.a03.*;
 import cgtools.*;
 import static cgtools.Vector.*;
-import cgg.a03.*;
 
 public record Raytracer(Group list, Camera camera, Point x0, double tMin, double tMax) implements Sampler {
     public Color getColor(double x, double y){

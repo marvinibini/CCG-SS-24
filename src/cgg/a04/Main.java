@@ -9,25 +9,48 @@ public class Main {
     public static void main(String[] args) {
         final int width = 1920;
         final int height = 1080;
-        double angel = 70;
+
         Point x0 = new Point(0, 0, 0);
         double tMin = 0;
         double tMax = Double.POSITIVE_INFINITY;
-        Image image = new Image(width, height);
+
+        Image image1 = new Image(width, height);
+        Image image2 = new Image(width, height);
+
+        Camera camera = new Camera(Math.PI/4, width, height);
+        Camera camera2 = new Camera(Math.PI/2.6, width, height);
+
+        // Erste Szene (eigene)
+        Group scene1 = new Group();
+        scene1.add(new Background(new Color(0.05, 0.05, 0.2)));
+        scene1.add(new Disc(point(0, -4, 7), direction(0, 1, 0), 1000, new Color(0.2, 0.2, 0.25)));
+        scene1.add(new Sphere(point(-2, 1, -5), 1, new Color(0.5, 0.5, 0.6)));
+        scene1.add(new Sphere(point(2, 3, -10), 0.3, new Color(1, 1, 1)));
+        scene1.add(new Sphere(point(-1, 3, -8), 0.2, new Color(1, 1, 1)));
+        scene1.add(new Sphere(point(0, 0, -3), 0.2, new Color(0.8, 0.2, 0.2)));
+        scene1.add(new Sphere(point(-3, -0.5, -7), 0.5, new Color(0.7, 0.7, 0.7)));
+        scene1.add(new Sphere(point(3, 0.5, -13), 0.5, new Color(0.6, 0.6, 0.6)));
+        scene1.add(new Sphere(point(-4, 0, -15), 0.5, new Color(0.4, 0.4, 0.4)));
+        scene1.add(new Sphere(point(4, 0, -15), 0.5, new Color(0.4, 0.4, 0.4)));
         
-        Camera camera = new Camera(angel, width, height);
-        Group scene = new Group();
+        // Zweite Szene
+        Group scene2 = new Group();
+        scene2.add(new Background(gray));
+        scene2.add(new Disc(point(0.0, -0.5, 0.0), direction(0, 1, 0), 100, yellow));
+        scene2.add(new Sphere(point(-1., -0.25, -2.5), 0.7, red));
+        scene2.add(new Sphere(point(0.0, -0.25, -2.5), 0.5, green));
+        scene2.add(new Sphere(point(1.0, -0.25, -2.5), 0.7, blue));
 
-        scene.add(new Background(gray));
-        scene.add(new Disc(point(0.0, -0.5, 0.0), direction(0, 1, 0), 100, yellow));
-        scene.add(new Sphere(point(-1., -0.25, -2.5), 0.7, red));
-        scene.add(new Sphere(point(0.0, -0.25, -2.5), 0.5, green));
-        scene.add(new Sphere(point(1.0, -0.25, -2.5), 0.7, blue));
-      
-        image.superSample(new Raytracer(scene, camera, x0, tMin, tMax), 3, 3);
+        // Rendering der ersten Szene
+        image1.superSample(new Raytracer(scene1, camera, x0, tMin, tMax), 3, 3);
+        final String filename1 = "doc/a04-creative-image.png";
+        image1.write(filename1);
+        System.out.println("Wrote image: " + filename1);
 
-        final String filename = "doc/a04-image.png";
-        image.write(filename);
-        System.out.println("Wrote image: " + filename);
+        // // Rendering der zweiten Szene
+        image2.superSample(new Raytracer(scene2, camera2, x0, tMin, tMax), 3, 3);
+        final String filename2 = "doc/a04-image.png";
+        image2.write(filename2);
+        System.out.println("Wrote image: " + filename2);
     }
 }

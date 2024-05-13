@@ -5,7 +5,7 @@ import cgg.a03.*;
 
 public class Group implements Shape{
 
-    public static ArrayList<Shape> shapes = new ArrayList<Shape>();
+    public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
     public Hit intersect(Ray r){
         Hit hit = null;
