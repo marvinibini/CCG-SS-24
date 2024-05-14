@@ -10,22 +10,33 @@ import java.util.ArrayList;
 public class ColoredDiscs implements Sampler {
     private List<Disc> discs;
 
-    public ColoredDiscs(int numberOfDiscs) {
-        discs = new ArrayList<>();
 
-        for (int i = 0; i < numberOfDiscs; i++) {
+public ColoredDiscs(int numberOfDiscs) {
+    // Initialize the list of discs
+    discs = new ArrayList<>();
 
-            double x = Random.random() * 960; // Beispielhafte Breite
-            double y = Random.random() * 540; // Beispielhafte Höhe
-            double radius = 5 + Random.random() * 85; // Radius zwischen 5 und 50
-            Color color = new Color(Random.random(), Random.random(), Random.random());
-            Disc disc = new Disc(x, y, radius, color);
-            discs.add(disc);
-        }
+    // Create the specified number of discs
+    for (int i = 0; i < numberOfDiscs; i++) {
+        // Generate random coordinates for the disc
+        double x = Random.random() * 960;
+        double y = Random.random() * 540;
 
-        // Sortieren der Scheiben, damit größere Scheiben zuerst gezeichnet werden
-        discs.sort((d1, d2) -> Double.compare(d2.radius, d1.radius));
-    }    
+        // Generate a random radius for the disc
+        double radius = 5 + Random.random() * 85; // Radius zwischen 5 und 50
+
+        // Generate a random color for the disc
+        Color color = new Color(Random.random(), Random.random(), Random.random());
+
+        // Create a new disc object
+        Disc disc = new Disc(x, y, radius, color);
+
+        // Add the disc to the list
+        discs.add(disc);
+    }
+
+    // Sort the discs by radius, so that larger discs are drawn first
+    discs.sort((d1, d2) -> Double.compare(d2.radius, d1.radius));
+}
 
     @Override
     public Color getColor(double x, double y) {
@@ -40,7 +51,7 @@ public class ColoredDiscs implements Sampler {
                     Math.min(result.r() + 0.5 * discColor.r(), 1.0),
                     Math.min(result.g() + 0.5 * discColor.g(), 1.0),
                     Math.min(result.b() + 0.5 * discColor.b(), 1.0)
-                ); // Additive Farbmischung mit Begrenzung und Reduktion der Intensität
+                ); 
                 // result = disc.getColor();
             }
         }
