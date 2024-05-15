@@ -1,9 +1,10 @@
 package cgg.a04;
 
 import cgg.a03.*;
+import cgg.a05.Material;
 import cgtools.*;
 
-public record Disc(Point anchorPoint, Direction normal, double radius, Color color) implements Shape {
+public record Disc(Point anchorPoint, Direction normal, double radius, Material material) implements Shape {
     public Hit intersect(Ray r) {
 
         Direction direction = r.direction();
@@ -18,7 +19,7 @@ public record Disc(Point anchorPoint, Direction normal, double radius, Color col
             Point treffer = Vector.add(Vector.multiply(direction, t), x0);
             limitation = Math.abs(Vector.length(Vector.subtract(treffer, anchorPoint)));
             if (limitation < radius) {
-                hit = new Hit(t, treffer, normal, color);
+                hit = new Hit(t, treffer, normal, material);
             }
         }
         return hit;

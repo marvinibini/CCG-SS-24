@@ -17,8 +17,8 @@ public class Main {
         Image image1 = new Image(width, height);
         Image image2 = new Image(width, height);
 
-        Camera camera = new Camera(Math.PI/2.6, width, height);
-        Camera camera2 = new Camera(Math.PI/2.6, width, height);
+        Camera camera = new Camera(Math.PI / 2.6, width, height);
+        Camera camera2 = new Camera(Math.PI / 2.6, width, height);
 
         // Erste Szene (eigene)
         Group scene1 = new Group();
@@ -32,7 +32,7 @@ public class Main {
         scene1.add(new Sphere(point(3, 0.5, -13), 0.5, new Color(0.1, 0.6, 0.1)));
         scene1.add(new Sphere(point(-4, 0, -15), 0.5, new Color(0.7, 0.4, 0.4)));
         scene1.add(new Sphere(point(4, 0, -15), 0.5, new Color(0.4, 0.4, 0.9)));
-        
+
         // Zweite Szene
         Group scene2 = new Group();
         scene2.add(new Background(new Color(0.05, 0.05, 0.2)));
@@ -41,9 +41,7 @@ public class Main {
         scene2.add(new Sphere(point(0.0, -0.25, -2.5), 0.5, color(0.4)));
         scene2.add(new Sphere(point(1.0, -0.25, -2.5), 0.7, color(0.313, 0.145, 0.564)));
 
-
-
-        // Rendering der ersten Szene
+        // Rendering der ersten Szene 
         image1.superSample(new Raytracer(scene1, camera, x0, tMin, tMax), 2, 3);
         final String filename1 = "doc/a04-creative-image.png";
         image1.write(filename1);

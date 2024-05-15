@@ -31,11 +31,11 @@ public class Random extends java.util.Random {
     generator = new Random(s);
   }
 
-  private Random() {
+  public Random() {
     this(System.nanoTime());
   }
 
-  private Random(final long seed) {
+  public Random(final long seed) {
     x = seed;
   }
 

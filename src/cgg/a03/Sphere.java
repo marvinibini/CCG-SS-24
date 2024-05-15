@@ -4,8 +4,9 @@ import cgtools.*;
 import static cgtools.Vector.*;
 
 import cgg.a04.Shape;
+import cgg.a05.Material;
 
-public record Sphere(Point sphereCenter, double radius, Color color) implements Shape{
+public record Sphere(Point sphereCenter, double radius, Material material) implements Shape{
     public Hit intersect(Ray r){
 
         Hit hit = null;
@@ -24,7 +25,7 @@ public record Sphere(Point sphereCenter, double radius, Color color) implements 
             if(t >= r.tMin() && t <= r.tMax()){
                 Point x = add(x0, (multiply(d, t)));
                 Direction nullVector = normalize(divide((subtract(x, sphereCenter)), radius));
-                hit = new Hit(t, x, nullVector, color);
+                hit = new Hit(t, x, nullVector, material);
             }
         }
         else if(diskriminante > 0){
@@ -39,19 +40,19 @@ public record Sphere(Point sphereCenter, double radius, Color color) implements 
                 }           
             Point x = r.pointAt(t);
             Direction nullVector = normalize(divide((subtract(x, sphereCenter)), radius));
-            hit = new Hit(t, x, nullVector, color);
+            hit = new Hit(t, x, nullVector, material);
             }
             else if(r.isValid(tMinus) == true){
                 t = tMinus;
                 Point x = r.pointAt(t);
                 Direction nullVector =normalize(divide((subtract(x, sphereCenter)), radius));
-                hit = new Hit(t, x, nullVector, color);
+                hit = new Hit(t, x, nullVector, material);
             }
             else if(r.isValid(tPlus) == true){
                 t = tPlus;
                 Point x = r.pointAt(t);
                 Direction nullVector = normalize(divide((subtract(x, sphereCenter)), radius));
-                hit = new Hit(t, x, nullVector, color);
+                hit = new Hit(t, x, nullVector, material);
             }
         }
         return hit;
