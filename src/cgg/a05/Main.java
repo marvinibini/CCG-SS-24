@@ -62,7 +62,7 @@ public class Main {
         }
 
         image2.superSample(new Raytracer(scene2, camera2, x0, tMin, tMax, 5), 5, 5);
-        final String filename2 = "doc/a05-test2.png";
+        final String filename2 = "doc/a05-own-scene.png";
         image2.write(filename2);
         System.out.println("Wrote image: " + filename2);
     }
