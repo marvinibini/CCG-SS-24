@@ -10,7 +10,7 @@ public record EmitterMaterial(Color emission) implements Material{
     }
 
     @Override
-    public boolean gestreut() {
+    public boolean scattered() {
        return false;
     }
 

@@ -5,7 +5,7 @@ import cgtools.*;
 
 public record PerDifMaterial(Color albedos) implements Material{
     @Override
-    public boolean gestreut() {
+    public boolean scattered() {
         return true;
     }
     @Override

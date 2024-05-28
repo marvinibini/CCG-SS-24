@@ -87,6 +87,7 @@ public class Image {
         blauGanz = blauGanz / (n * n * m);
         Color color = new Color(rotGanz, gruenGanz, blauGanz);
         setPixel(x, y, color);
+        System.out.println(x + "/" + y);
       }
     }
   }

@@ -2,7 +2,7 @@ package cgg.a06;
 
 import cgtools.*;
 
-public record OpenCylinder(Point pos, double radX, double height, Material mat) implements Shape {
+public record OpenCylinder(Point pos, double rad, double height, Material mat) implements Shape {
 
     public Hit intersect(Ray ray) {
 
@@ -10,7 +10,7 @@ public record OpenCylinder(Point pos, double radX, double height, Material mat) 
 
         double a = ray.direction().x() * ray.direction().x() + ray.direction().z() * ray.direction().z();
         double b = 2 * (ray.direction().x() * dir.x() + ray.direction().z() * dir.z());
-        double c = dir.x() * dir.x() + dir.z() * dir.z() - radX * radX;
+        double c = dir.x() * dir.x() + dir.z() * dir.z() - rad * rad;
 
         double discriminant = b * b - 4 * a * c;
 
@@ -22,11 +22,16 @@ public record OpenCylinder(Point pos, double radX, double height, Material mat) 
         double t = (t1 >= ray.tMin() && t1 <= ray.tMax()) ? t1 : (t2 >= ray.tMin() && t2 <= ray.tMax()) ? t2 : -1;
         if (!ray.isValid(t)) return null;
 
-        if (ray.pointAt(t).y() < pos.y() || ray.pointAt(t).y() > pos.y() + height) 
+        if (ray.pointAt(t).y() < pos.y() || ray.pointAt(t).y() > pos.y() + height){ 
         
             return null;
+        }
+        // return new Hit(t, ray.pointAt(t), Vector.normalize(Vector.subtract(ray.pointAt(t), pos)), mat);
+            double x = Vector.normalize(Vector.divide(Vector.subtract(ray.pointAt(t), pos), rad)).x();
+            double z = Vector.normalize(Vector.divide(Vector.subtract(ray.pointAt(t), pos), rad)).z();
+            Direction n = new Direction(x, 0, z);
+        return new Hit(t, ray.pointAt(t), n, mat);
 
-        return new Hit(t, ray.pointAt(t), Vector.normalize(Vector.subtract(ray.pointAt(t), pos)), mat);
     }
 }
 
